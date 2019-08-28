@@ -47,6 +47,8 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
+[Class Diagram](https://drive.google.com/file/d/1V-2JHhpjgNLakkdCqNkOzr5TpO4Az-Fq/view?usp=sharing)
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
