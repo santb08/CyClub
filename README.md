@@ -47,7 +47,11 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
+## Diagrams
 [Class Diagram](https://drive.google.com/file/d/1V-2JHhpjgNLakkdCqNkOzr5TpO4Az-Fq/view?usp=sharing)
+[Components](https://drive.google.com/file/d/1GhUvz4JUSHw2SoXpA5nOu_xtsEtbLzqG/view?usp=sharing)
+[Secuence](https://drive.google.com/file/d/1BJlk9t-don4Bg2ClXbUwe0X79M31J9j1/view?usp=sharing)
+[Despliegue](https://drive.google.com/file/d/1mUy7kYZQQ0xejg2HLeQ4RZ9ABuX_3If1/view?usp=sharing)
 
 ## Running the tests
 
