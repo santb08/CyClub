@@ -17,43 +17,41 @@ En resumidas cuentas, CyClub busca apoyar, soportar e incentivar un gran deporte
 ¿Cómo soluciona el problema nuestra propuesta? 
 Incentivar el uso de transportes amigables con el ambiente y a la generación de confianza a los ciclistas por medio de una aplicación. Dicha aplicación permitirá a los ciclistas conocer las ciclo rutas locales y parqueaderos cercanos, registrar diferentes variables de interés a los deportistas, hacer “competencias” con sus conocidos (¿Y por qué no? Con desconocidos autorizados también), dejarle retos a tus conocidos y cumplir tus personales, conocer gente, grupos, y eventos; además de contar con un pequeño sistema de contacto con emergencias, o contactos de confianza, en caso de alguna ocurrencia durante el viaje. (EXTRA: Obtener información de sitios abiertos para ciclistas y que ofrezcan descuentos o bebidas para las personas que vayan a sus tiendas en bicicletas – COMPARACIÓN: Taxistas café 24h). ¿Por qué? Integrar a las personas que comparten gustos por este deporte.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Getting Started (Preparación)
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Para correr esta aplicación necesitas tener todo el SDK de Flutter funcional. Esto lo puedes verificar con el siguiente comando:
 
 ```
-Give examples
+flutter doctor
 ```
+
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Luego podemos pasar a instalar las dependencias del proyecto
 
 ```
-Give the example
+flutter pub get
 ```
 
-And repeat
+Y luego podemos pasar a correr el proyecto
 
 ```
-until finished
+flutter run
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Eso sí, debes tener un dispositivo conectado por puerto USB o corriendo una VM en localhost para poder emular esta aplicación.
+
+En caso de algún error, dejar un mensaje en la sección Issues del repositorio.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Explain how to run the automated tests for this system (Jeje)
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+Explain what these tests test and why (Jeje)
 
 ```
 Give an example
@@ -61,7 +59,7 @@ Give an example
 
 ### And coding style tests
 
-Explain what these tests test and why
+Explain what these tests test and why (Jeje)
 
 ```
 Give an example
@@ -73,9 +71,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Flutter](https://flutter.dev/) - The UIkit used to build the app
+* [Pub](https://pub.dev/) - Dart dependencies packages manager
 
 ## Contributing
 
