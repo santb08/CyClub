@@ -29,12 +29,13 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   @override
+
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>{
   Completer<GoogleMapController> _controller = Completer();
-
+  
 
     static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -63,9 +64,29 @@ class _HomePageState extends State<HomePage>{
         label: Text('To the lake!'),
         icon: Icon(Icons.directions_boat),
       ),
+      appBar: new AppBar(
+        title: new Text("Menu"),
+      ),
+      drawer: new Drawer(
+        child: ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: new Text("Michi"),
+              accountEmail: new Text("michimbo@gmail.com"),
+              currentAccountPicture: new CircleAvatar(
+                backgroundImage: new NetworkImage("https://placekitten.com/500/500"),
+              ),
+            ),
+            new ListTile(
+              title: new Text("Mi Perfil"),
+            )
+          ],
+        ),
+      ),
     );
   }
 
+  
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
