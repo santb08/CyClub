@@ -15,6 +15,7 @@ class _ProfileState extends State<Profile> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: <Widget>[
+                SizedBox(height: 30.0),
                 Container(
                   width: 200.0,
                   height: 200.0,
@@ -54,15 +55,14 @@ class _ProfileState extends State<Profile> {
                   child: Material(  
                     elevation: 7,
                     child: Text("Aquí va información, aún no sé qué información, pero irá información")
+                    
                   ),
                 )
               ],
             ),
           ),
-          
-          
         ],
-      )
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cyclub/Profile.dart';
 import "package:flutter/material.dart";
 
 class NavBar extends StatefulWidget {
@@ -15,8 +16,10 @@ class _NavBar extends State<NavBar> {
           RaisedButton(
             color: Colors.white,
             elevation: 0.0,
-            child: Icon(Icons.home),
-            onPressed: () => print("Cañas la vendiste muy feo 1"),
+            child: Icon(Icons.person),
+            onPressed: () => Navigator.push(context, new MaterialPageRoute(
+              builder: (BuildContext context) => new Profile()
+            )),
           ),
           RaisedButton(
             color: Colors.white,
