@@ -9,8 +9,13 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(.9),
       body: Stack(  //I want to add many widgets here
         children: <Widget>[
+          ClipPath(
+            child: Container(color: Colors.limeAccent.withOpacity(0.8)),
+            clipper: getClipper(),
+          ),
           Positioned(
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -25,9 +30,9 @@ class _ProfileState extends State<Profile> {
                       image: NetworkImage("https://cdn2.thecatapi.com/images/8qf.jpg"),
                       fit: BoxFit.cover,
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(90)),
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
                     boxShadow: [
-                      BoxShadow(blurRadius: 15, color: Colors.black)
+                      BoxShadow(blurRadius: 10, color: Colors.black)
                     ]
                   ),
                 ),
@@ -64,5 +69,24 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
+  }
+}
+
+class getClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = new Path();
+    path.lineTo(0.0, 0.0);
+    path.lineTo(size.width * 1.2, size.height);
+    path.lineTo(size.width , size.height);
+    path.lineTo(0.0, size.height / 1.5);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    // TODO: implement shouldReclip
+    return true;
   }
 }
