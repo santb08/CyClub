@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cyclub/Map.dart';
 class FormLogin extends StatefulWidget {
   @override
   _FormLogin createState() => _FormLogin();
 }
 
 class _FormLogin extends State<FormLogin> {
-  final _formKey = GlobalKey<_FormLogin>();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
-        body: Form(
-            key: _formKey,
-            child: Container(
-              padding: EdgeInsets.only(top: 140, left: 50, right: 50),
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.only(top: 160, left: 20, right: 20),
+          child: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -49,11 +57,19 @@ class _FormLogin extends State<FormLogin> {
                     textColor: Colors.white,
                     minWidth: 150.0,
                     onPressed: () {
-                      print("esta vuelta hace algo");
+                      setState(() {
+                       if (_formKey.currentState.validate()) Navigator.push(context, new MaterialPageRoute(
+                         builder: (BuildContext context) => Map()
+                       ));
+                      });
                     },
                   )
                 ],
               ),
-            )));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
