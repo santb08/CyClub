@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 30.0),
+                SizedBox(height: 50.0),
                 Container(
                   width: 200.0,
                   height: 200.0,
@@ -32,13 +32,13 @@ class _ProfileState extends State<Profile> {
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(100)),
                     boxShadow: [
-                      BoxShadow(blurRadius: 10, color: Colors.black)
+                      BoxShadow(blurRadius: 5, color: Colors.black)
                     ]
                   ),
                 ),
                 SizedBox(height: 30),
                 Text(
-                  "Lil Cool Cat",
+                  "@LilCoolCat",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -53,14 +53,69 @@ class _ProfileState extends State<Profile> {
                       fontStyle: FontStyle.italic,
                       fontFamily: 'Montserrat'),
                 ),
-                SizedBox(height: 25.0),
+                SizedBox(height: 50.0),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.95,
+                  width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 3,
+                  margin: EdgeInsets.zero,
                   child: Material(  
                     elevation: 7,
-                    child: Text("Aquí va información, aún no sé qué información, pero irá información")
-                    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(  
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image(
+                              image: AssetImage("assets/bike.png"),
+                              width: MediaQuery.of(context).size.width * 0.30,
+                            ),
+                            Text(
+                              "kms recorridos",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Monserrat'
+                              )
+                            ),
+                            Text("0,0 km")
+                          ],
+                        ),
+                      Column(  
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: AssetImage("assets/clock.png"),
+                            width: MediaQuery.of(context).size.width * 0.30,
+                          ),
+                          Text(
+                            "Tiempo recorridos",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Monserrat'
+                            )
+                          ),
+                          Text("0a 0m 0d 0h 0m 0s")
+                        ],
+                      ),
+                      Column(  
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: AssetImage("assets/calories.png"),
+                            width: MediaQuery.of(context).size.width * 0.30,
+                          ),
+                          Text(
+                            "Calorías quemadas",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Monserrat'
+                            )
+                          ),
+                          Text("0,0 cal")
+                        ],
+                      )
+                    ],
+                    ),                    
                   ),
                 )
               ],

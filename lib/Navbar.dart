@@ -1,8 +1,7 @@
 import 'package:cyclub/FormLogin.dart';
 import 'package:cyclub/Profile.dart';
 import "package:flutter/material.dart";
-import 'package:cyclub/FormLogin.dart';
-
+  
 class NavBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _NavBar();
