@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:custom_radio/custom_radio.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cyclub/Map.dart';
 class FormLogin extends StatefulWidget {
   @override
@@ -9,9 +9,9 @@ class FormLogin extends StatefulWidget {
 
 class _FormLogin extends State<FormLogin> {
   final _formKey = GlobalKey<FormState>();
+  //Controllers
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
   @override
   Widget build(BuildContext context) { 
     return Scaffold(
@@ -33,7 +33,7 @@ class _FormLogin extends State<FormLogin> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0))),
                     validator: (value) {
-                      return (value.isEmpty) ? 'Ingrese email' : null;
+                      return (value.isEmpty) ? 'Por favor ingrese un email' : null;
                     },
                   ),
                   Padding(
@@ -46,7 +46,7 @@ class _FormLogin extends State<FormLogin> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25.0))),
                       validator: (value) {
-                        return (value.isEmpty) ? "Ingrese Contraseña" : null;
+                        return (value.isEmpty) ? "Por favor ingrese una contraseña" : null;
                       },
                     ),
                   ),
@@ -63,7 +63,7 @@ class _FormLogin extends State<FormLogin> {
                        ));
                       });
                     },
-                  )
+                  ),
                 ],
               ),
             ),
