@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cyclub/App.dart';
 
 //TODO: Hijueputa, comentá todo este mierdero
-
 class FormLogin extends StatefulWidget {
   @override
   _FormLogin createState() => _FormLogin();
@@ -10,9 +9,13 @@ class FormLogin extends StatefulWidget {
 
 class _FormLogin extends State<FormLogin> {
   final _formKey = GlobalKey<FormState>();
+  
+  //Controllers
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -68,6 +71,7 @@ class _FormLogin extends State<FormLogin> {
                       setState(() {
                        if (_formKey.currentState.validate()) Navigator.push(context, new MaterialPageRoute(
                          builder: (BuildContext context) => App()
+
                        ));
                       });
                     },
