@@ -17,7 +17,7 @@ class _FormLogin extends State<FormLogin> {
       body: Form(
         key: _formKey,
         child: Container(
-          padding: EdgeInsets.only(top: 160, left: 20, right: 20),
+          padding: EdgeInsets.only(top: 120, left: 20, right: 20),
           child: SingleChildScrollView(
             child: ConstrainedBox(
               constraints:
@@ -25,15 +25,24 @@ class _FormLogin extends State<FormLogin> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(
-                        labelText: "Ingrese Email",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0))),
-                    validator: (value) {
-                      return (value.isEmpty) ? 'Por favor ingrese un email' : null;
-                    },
+                  Image(
+                    color: Colors.blueAccent,
+                    width: 80,
+                    height: 80,
+                    image: AssetImage('assets/profile.png'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: "Ingrese Email",
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0))),
+                              validator: (value) {
+                                return (value.isEmpty) ? 'Por favor ingrese un email' : null;
+                              },
+                            )
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
