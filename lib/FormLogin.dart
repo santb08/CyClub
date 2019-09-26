@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:cyclub/App.dart';
 
@@ -15,71 +17,95 @@ class _FormLogin extends State<FormLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Container(
-          padding: EdgeInsets.only(top: 120, left: 20, right: 20),
-          child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image(
-                    color: Colors.blueAccent,
-                    width: 80,
-                    height: 80,
-                    image: AssetImage('assets/profile.png'),
-                  ),
-                  Padding(
+    return 
+    Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/background_login.jpg'),
+          fit: BoxFit.cover
+        )
+      ),
+      child: 
+      Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Form(
+          key: _formKey,
+          child: Container(
+            padding: EdgeInsets.only(top: 100, left: 20, right: 20),
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image(
+                      color: Colors.white,
+                      width: 80,
+                      height: 80,
+                      image: AssetImage('assets/profile.png'),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: TextFormField(
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                              labelText: "Ingrese Email",
+                              labelStyle: TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(25.0)
+                              )
+                          ),
+                          validator: (value) {
+                            return (value.isEmpty)
+                                ? 'Por favor ingrese un email'
+                                : null;
+                          },
+                      )
+                    ),
+                    Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: TextFormField(
+                        cursorColor: Colors.white,
+                        obscureText: true,
                         decoration: InputDecoration(
-                            labelText: "Ingrese Email",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0))),
-                        validator: (value) {
-                          return (value.isEmpty)
-                              ? 'Por favor ingrese un email'
-                              : null;
-                        },
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                           labelText: "Ingrese Contraseña",
+                          labelStyle: TextStyle(color: Colors.white),
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0))),
-                      validator: (value) {
-                        return (value.isEmpty)
-                            ? "Por favor ingrese una contraseña"
-                            : null;
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(25.0)
+                          )  
+                        ),
+                        validator: (value) {
+                          return (value.isEmpty)
+                              ? "Por favor ingrese una contraseña"
+                              : null;
+                        },
+                      ),
+                    ),
+              
+                    MaterialButton(
+                      color: Colors.transparent,
+                      child: Text('Ingresar'),
+                      textColor: Colors.white,
+                      minWidth: 150,
+                      shape: StadiumBorder(),
+                      onPressed: () {
+                        setState(() {
+                          if (_formKey.currentState.validate())
+                            Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (BuildContext context) => App()));
+                        });
                       },
                     ),
-                  ),
-                  MaterialButton(
-                    child: Text("Ingresar"),
-                    color: Colors.blueAccent,
-                    shape: StadiumBorder(),
-                    textColor: Colors.white,
-                    minWidth: 150.0,
-                    onPressed: () {
-                      setState(() {
-                        if (_formKey.currentState.validate())
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (BuildContext context) => App()));
-                      });
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

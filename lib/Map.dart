@@ -84,6 +84,14 @@ class _Map extends State<Map>{
             polylines: _polylines
           ),
           Positioned(
+            bottom: 250,
+            left: 0,
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: ()=> print('se imprimio'),
+            ),
+          ),
+          Positioned(
             child: Stack(
               children: <Widget>[
                 Positioned(
