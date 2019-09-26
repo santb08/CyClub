@@ -24,20 +24,22 @@ class SideBarMenu extends StatelessWidget {
 
   Widget build(context) {
     return Drawer(
-      child: ListView(children: <Widget>[
-        DrawerHeader(
-          child: Text("Menu"),
-          decoration: BoxDecoration(color: Colors.blue),
-        ),
-        ListTile(
-          title: Text("Mi perfil"),
-          onTap: () => Navigator.push(context, _createRoute()),
-        ),
-        ListTile(
-          title: Text("Otra opción"),
-          onTap: () => Navigator.push(context, _createRoute()),
-        ),
-      ]), // appBar: SideMenu(),
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            child: Text("Menu"),
+            decoration: BoxDecoration(color: Colors.blue),
+          ),
+          ListTile(
+            title: Text("Mi perfil"),
+            onTap: () => Navigator.push(context, _createRoute()),
+          ),
+          ListTile(
+            title: Text("Otra opción"),
+            onTap: () => Navigator.push(context, _createRoute()),
+          ),
+        ]
+      ), // appBar: SideMenu(),
     );
   }
 }

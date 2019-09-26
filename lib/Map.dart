@@ -1,4 +1,5 @@
 //ICONS https://www.flaticon.com/authors/freepik
+import 'package:cyclub/App.dart';
 import 'package:cyclub/Profile.dart';
 import 'package:cyclub/helpers/polylines.dart';
 import 'package:flutter/material.dart';
@@ -87,8 +88,9 @@ class _Map extends State<Map>{
             bottom: 250,
             left: 0,
             child: IconButton(
-              icon: Icon(Icons.arrow_forward),
-              onPressed: ()=> print('se imprimio'),
+              iconSize: 50,
+              icon: Icon(Icons.menu),
+              onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SideBarMenu()))
             ),
           ),
           Positioned(
