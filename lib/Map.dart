@@ -83,34 +83,9 @@ class _Map extends State<Map>{
             markers: Set<Marker>.from([myLocation]),
             polylines: _polylines
           ),
-          Positioned(
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  bottom: -80,
-                  left: -60,
-                  child: Container(
-                    width: 225,
-                    height: 225,
-                    decoration: BoxDecoration(
-                      color: Colors.limeAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(155)),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 25, color: Colors.black)
-                      ]
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: -10,
-                  child: AvatarButton()
-                ),
-              ]
-            ),
-          ),
+          AvatarButton()
         ],
-      )
+      ),
       
     );
   }
@@ -191,18 +166,40 @@ class AvatarButton extends StatelessWidget{
   }
 
   Widget build(context) {
-    return GestureDetector(
-      onTap: () => Navigator.push(context, _createRoute()),
-      child: Container(
-        width: 167,
-        height: 180,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          image: DecorationImage(
-            image: AssetImage("assets/Panita.png"),
-            fit: BoxFit.cover
-          )
-        ),
+    return Positioned(
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            bottom: -80,
+            left: -60,
+            child: Container(
+              width: 225,
+              height: 225,
+              decoration: BoxDecoration(
+                color: Colors.limeAccent.withAlpha(0xBB), //I just wanted to say "Bebé" in Hex
+                borderRadius: BorderRadius.all(Radius.circular(155)),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: -10,
+            child: GestureDetector(
+              onTap: () => Navigator.push(context, _createRoute()),
+              child: Container(
+                width: 167,
+                height: 180,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  image: DecorationImage(
+                    image: AssetImage("assets/Panita.png"),
+                    fit: BoxFit.cover
+                  )
+                ),
+              ),
+            ),
+          ),
+        ]
       ),
     );
   }

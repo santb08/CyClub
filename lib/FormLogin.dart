@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cyclub/Map.dart';
 
 //TODO: Hijueputa, comentá todo este mierdero
 
@@ -10,7 +11,7 @@ class FormLogin extends StatefulWidget {
 class _FormLogin extends State<FormLogin> {
   final _formKey = GlobalKey<_FormLogin>();
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return Scaffold(
         body: Form(
@@ -51,7 +52,10 @@ class _FormLogin extends State<FormLogin> {
                     textColor: Colors.white,
                     minWidth: 150.0,
                     onPressed: () {
-                      print("esta vuelta hace algo");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Map())
+                      );
                     },
                   )
                 ],
