@@ -1,4 +1,5 @@
 //ICONS https://www.flaticon.com/authors/freepik
+import 'package:cyclub/App.dart';
 import 'package:cyclub/Profile.dart';
 import 'package:cyclub/helpers/polylines.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,19 @@ class _Map extends State<Map>{
             markers: Set<Marker>.from([myLocation]),
             polylines: _polylines
           ),
-          AvatarButton()
+          Positioned(
+            bottom:10,
+            right: 0,
+            child: IconButton(
+              splashColor: Colors.grey,
+              color: Colors.black,
+              tooltip: 'Menu',
+              iconSize: 50,
+              icon: Icon(Icons.menu),
+              onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SideBarMenu()))
+            ),
+          ),
+          AvatarButton(),
         ],
       ),
       

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cyclub/pojos/User.dart';
 import 'package:flutter/material.dart';
 import 'package:cyclub/Map.dart';
@@ -9,13 +11,15 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:cyclub/helpers/api.dart';
 import 'package:http/http.dart';
 
-class SignInWithButton extends StatelessWidget {
+abstract class SignInWithButton extends StatelessWidget {
   String text;
-  var onpressed;
-  
+  IconData icon;
+
   //Constructor
-  SignInWithButton({this.text, this.onpressed});
-  
+  SignInWithButton(this.text, this.icon);
+
+  Future<User> signIn();
+
   @override
   Widget build(BuildContext context){
     return Container(
@@ -31,7 +35,7 @@ class SignInWithButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
             Icon(
-              FontAwesomeIcons.google,
+              this.icon,
               color: Color(0xffCE107C)
             ),
             SizedBox(width:10.0),
@@ -40,7 +44,7 @@ class SignInWithButton extends StatelessWidget {
               style: TextStyle(color: Colors.black,fontSize: 18.0),
             ),
           ],),
-          onPressed: onpressed,
+          onPressed: signIn,
         ),
       )
     );
@@ -51,10 +55,13 @@ class SignInWithButton extends StatelessWidget {
  * This component is a simple button that
  * will handle all the SignIn with Firebase through Google.
  **/ 
-class GoogleSignInButton extends StatelessWidget {
+class GoogleSignInButton extends SignInWithButton {
   //Required variables to user GoogleSignIn
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+  GoogleSignInButton() : super("Google", FontAwesomeIcons.google);
   
   /**
    * This async function will let us sign in with google
@@ -63,37 +70,39 @@ class GoogleSignInButton extends StatelessWidget {
    *
    * @
    */
-  Future<dynamic> signIn() async {
+  Future<User> signIn() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final user = User(email: googleUser.email, name: googleUser.displayName);
     Response signIn = await userSignIn(user);
-    
-    //User's sign in
-    if(signIn.statusCode == 201) {
-      //TODO: Redirect to fill my profile
-    }
 
     //User's log in
     if (signIn.statusCode == 200) {
-      
+      var body = json.decode(signIn.body);
+      print(body["msg"]);
     }
 
-    
+    //User's sign in
+    if(signIn.statusCode == 201) {
+      //TODO: Redirect to fill my profile
+      var body = json.decode(signIn.body);
+      print("HOLA");
+    }    
   }
-
-
-  //Return google sign in button
-  Widget build(BuildContext context) => SignInWithButton(text: "Sign In With Google", onpressed: signIn);
 }
 
-class FacebookSignInButton extends StatelessWidget {
+class FacebookSignInButton extends SignInWithButton{
+
+  FacebookSignInButton(String text, var onpressed, var icon) : super(text, onpressed){
+    this.icon = icon;
+  }
+
   
   /**
    * This async function will let us sign in with facebook
    * implementation used in official docs.
    * After all, it'll return a FirebaseUser that's a Future than can be solved as we want
    */
-  Future<FirebaseUser> signIn() async {
+  Future<User> signIn() async {
     print("Iniciando sesión con facebook");
     final facebookLogin = FacebookLogin();
     final result = await facebookLogin.logIn(['email']);
@@ -114,9 +123,6 @@ class FacebookSignInButton extends StatelessWidget {
         break;
     }
   }
-
-  Widget build(BuildContext context) => SignInWithButton(text: "Sign In With Facebook", onpressed: signIn);
-
 }
 
 class FormLogin extends StatefulWidget {
@@ -130,73 +136,96 @@ class _FormLogin extends State<FormLogin> {
   final _formKey = GlobalKey<FormState>();
   @override 
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Container(
-          padding: EdgeInsets.only(top: 120, left: 20, right: 20),
-          child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image(
-                    color: Colors.blueAccent,
-                    width: 80,
-                    height: 80,
-                    image: AssetImage('assets/profile.png'),
-                  ),
-                  Padding(
+    return 
+    Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/background_login.jpg'),
+          fit: BoxFit.cover
+        )
+      ),
+      child: 
+      Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Form(
+          key: _formKey,
+          child: Container(
+            padding: EdgeInsets.only(top: 80, left: 20, right: 20),
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image(
+                      
+                      width: 120,
+                      height: 120,
+                      image: AssetImage('assets/temp.png'),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: TextFormField(
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                              labelText: "Ingrese Email",
+                              labelStyle: TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(25.0)
+                              )
+                          ),
+                          validator: (value) {
+                            return (value.isEmpty)
+                                ? 'Por favor ingrese un email'
+                                : null;
+                          },
+                      )
+                    ),
+                    Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: TextFormField(
+                        cursorColor: Colors.white,
+                        obscureText: true,
                         decoration: InputDecoration(
-                            labelText: "Ingrese Email",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0))),
-                        validator: (value) {
-                          return (value.isEmpty)
-                              ? 'Por favor ingrese un email'
-                              : null;
-                        },
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                           labelText: "Ingrese Contraseña",
+                          labelStyle: TextStyle(color: Colors.white),
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0))),
-                      validator: (value) {
-                        return (value.isEmpty)
-                            ? "Por favor ingrese una contraseña"
-                            : null;
-                      },
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(25.0)
+                          )  
+                        ),
+                        validator: (value) {
+                          return (value.isEmpty)
+                              ? "Por favor ingrese una contraseña"
+                              : null;
+                        },
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    child: Text("Ingresar"),
-                    color: Colors.blueAccent,
-                    shape: StadiumBorder(),
-                    textColor: Colors.white,
-                    minWidth: 150.0,
-                    onPressed: () {
-                      setState(() {
-                        if (_formKey.currentState.validate())
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (BuildContext context) => App()));
-                      });
-                    },
-                  ),
-                  GoogleSignInButton(),
-                  FacebookSignInButton()
-                ],
+              
+                    MaterialButton(
+                      color: Colors.transparent,
+                      child: Text('Ingresar'),
+                      textColor: Colors.white,
+                      minWidth: 150,
+                      shape: StadiumBorder(),
+                      onPressed: () {
+                        setState(() {
+                          if (_formKey.currentState.validate())
+                            Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (BuildContext context) => App()));
+                        });
+                      },
+                      ),
+                      GoogleSignInButton(),
+                  ],
+                ),
               ),
             ),
           ),
