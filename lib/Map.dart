@@ -85,9 +85,12 @@ class _Map extends State<Map>{
             polylines: _polylines
           ),
           Positioned(
-            bottom: 250,
-            left: 0,
+            bottom:10,
+            right: 0,
             child: IconButton(
+              splashColor: Colors.grey,
+              color: Colors.black,
+              tooltip: 'Menu',
               iconSize: 50,
               icon: Icon(Icons.menu),
               onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SideBarMenu()))

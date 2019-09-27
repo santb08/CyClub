@@ -31,7 +31,7 @@ class _FormLogin extends State<FormLogin> {
         body: Form(
           key: _formKey,
           child: Container(
-            padding: EdgeInsets.only(top: 100, left: 20, right: 20),
+            padding: EdgeInsets.only(top: 80, left: 20, right: 20),
             child: SingleChildScrollView(
               child: ConstrainedBox(
                 constraints:
@@ -40,10 +40,10 @@ class _FormLogin extends State<FormLogin> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Image(
-                      color: Colors.white,
-                      width: 80,
-                      height: 80,
-                      image: AssetImage('assets/profile.png'),
+                      
+                      width: 120,
+                      height: 120,
+                      image: AssetImage('assets/temp.png'),
                     ),
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),

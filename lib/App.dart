@@ -24,7 +24,7 @@ class SideBarMenu extends StatelessWidget {
 
   Widget build(context) {
     return Drawer(
-      child: ListView(
+      child: ListView( 
         children: <Widget>[
           DrawerHeader(
             child: Text("Menu"),
