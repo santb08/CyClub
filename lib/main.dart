@@ -1,5 +1,6 @@
-import 'package:cyclub/App.dart';
+import 'package:cyclub/FormLogin.dart';
 import 'package:flutter/material.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,9 +11,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: App(),
+      home: FormLogin(),
       debugShowCheckedModeBanner: false,
-      
     );
   }
-} 
+}

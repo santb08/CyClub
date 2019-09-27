@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "934563669854",
+    "firebase_url": "https://cyclub-1566261580006.firebaseio.com",
+    "project_id": "cyclub-1566261580006",
+    "storage_bucket": "cyclub-1566261580006.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934563669854:android:42330afc2eb7a09b6911cf",
+        "android_client_info": {
+          "package_name": "com.aishcomp.cyclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934563669854-rvt9e9g72kr42sm5drtps7v52rnar7qi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aishcomp.cyclub",
+            "certificate_hash": "79136f1e1d45455b694ccc1cbc2ca023cd8c65b8"
+          }
+        },
+        {
+          "client_id": "934563669854-i2uu31jv1ffkn44qdj9s8metbip02sjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjLH_x0w104NYLY0lTZgMaWHv4hfgHXLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934563669854-i2uu31jv1ffkn44qdj9s8metbip02sjp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

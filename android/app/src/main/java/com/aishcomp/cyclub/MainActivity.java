@@ -1,4 +1,4 @@
-package com.example.cyclub;
+package com.aishcomp.cyclub;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:cyclub/pojos/User.dart';
 import 'package:cyclub/pojos/route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -24,4 +27,14 @@ Future<List<Route>> getRoutes() async {
   } else {
     throw Exception('Failed to load routes');
   }
+}
+
+
+Future<dynamic> userSignIn(User user) async {  
+  Map<String, String> headers = {"Content-type": "application/json"};
+
+
+  final response = await http.post('http://192.168.1.57:3000/api/users/SignInWithCredentials', 
+    body: {"email": user.email, "name": user.name });
+  return response;
 }

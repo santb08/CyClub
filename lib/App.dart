@@ -1,10 +1,8 @@
 import 'package:cyclub/Map.dart';
-import 'package:cyclub/Navbar.dart';
 import 'package:cyclub/Profile.dart';
-import 'package:cyclub/SideMenu.dart';
 import 'package:flutter/material.dart';
 
-class SideBarMenu extends StatelessWidget{
+class SideBarMenu extends StatelessWidget {
   Route _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => Profile(),
@@ -13,7 +11,8 @@ class SideBarMenu extends StatelessWidget{
         var end = Offset.zero;
         var curve = Curves.ease;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -23,35 +22,28 @@ class SideBarMenu extends StatelessWidget{
     );
   }
 
-  Widget build(context){
+  Widget build(context) {
     return Drawer(
-      child: ListView(
-          children: <Widget>[
-          DrawerHeader(
-            child: Text("Menu"),
-            decoration: BoxDecoration(
-              color: Colors.blue
-            ),
-          ),
-          ListTile(
-            title: Text("Mi perfil"),
-            onTap:  () => Navigator.push(context, _createRoute()),
-          ),
-          ListTile(
-            title: Text("Otra opción"),
-            onTap:  () => Navigator.push(context, _createRoute()),
-          ),
-        ]
-      ), // appBar: SideMenu(),
+      child: ListView(children: <Widget>[
+        DrawerHeader(
+          child: Text("Menu"),
+          decoration: BoxDecoration(color: Colors.blue),
+        ),
+        ListTile(
+          title: Text("Mi perfil"),
+          onTap: () => Navigator.push(context, _createRoute()),
+        ),
+        ListTile(
+          title: Text("Otra opción"),
+          onTap: () => Navigator.push(context, _createRoute()),
+        ),
+      ]), // appBar: SideMenu(),
     );
   }
 }
 
-class App extends StatelessWidget{
-  Widget build(BuildContext context){
-    return Scaffold(
-      body: Map(),
-      drawer: SideBarMenu() 
-    );
+class App extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(body: Map(), drawer: SideBarMenu());
   }
 }
