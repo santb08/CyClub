@@ -110,7 +110,7 @@ class SideBarMenu extends StatelessWidget {
             )
           ),
           ListTile(
-            title: Text("Conocenos"),
+            title: Text("Conócenos"),
             subtitle: Text('Acerca de nosotros...'),
             onTap: () => print('about'),
           ),
