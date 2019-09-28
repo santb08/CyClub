@@ -1,3 +1,4 @@
+import 'package:cyclub/CellphoneCall.dart';
 import 'package:cyclub/Map.dart';
 import 'package:cyclub/Profile.dart';
 import 'package:cyclub/pojos/User.dart';
@@ -41,7 +42,7 @@ class SideBarMenu extends StatelessWidget {
             )
           ),
           MaterialButton(
-            onPressed: () => print('perfil'),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Profile(this.user))),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -102,7 +103,7 @@ class SideBarMenu extends StatelessWidget {
           ),
           MaterialButton(
             color: Colors.redAccent,
-            onPressed: () => print('llamada'),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CellphoneCall())),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,

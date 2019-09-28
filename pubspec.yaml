@@ -33,6 +33,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  #Launcher for the browser and the cellphone calls
+  url_launcher: ^5.1.4
+
 
 dev_dependencies:
   flutter_test:
