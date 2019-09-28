@@ -1,11 +1,14 @@
 import 'package:cyclub/Map.dart';
 import 'package:cyclub/Profile.dart';
+import 'package:cyclub/pojos/User.dart';
 import 'package:flutter/material.dart';
 
 class SideBarMenu extends StatelessWidget {
+  User user;
+  SideBarMenu(User user) {this.user = user;}
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Profile(),
+      pageBuilder: (context, animation, secondaryAnimation) => Profile(this.user),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
@@ -119,9 +122,14 @@ class SideBarMenu extends StatelessWidget {
     );
   }
 }
+//TODO: poner Photo by Victor Xok on Unsplash
 
 class App extends StatelessWidget {
+  User user;
+  App(User user) {
+    this.user = user;
+  }
   Widget build(BuildContext context) {
-    return Scaffold(body: Map(), drawer: SideBarMenu());
+    return Scaffold(body: Map(this.user), drawer: SideBarMenu(this.user));
   }
 }

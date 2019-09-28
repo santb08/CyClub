@@ -1,11 +1,21 @@
+import 'package:cyclub/pojos/User.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
-  _ProfileState createState() => _ProfileState();
+  User user;
+  Profile(User user) {
+    this.user = user;
+  }
+  _ProfileState createState() => _ProfileState(this.user);
 }
 
 class _ProfileState extends State<Profile> {
+  User user;
+  _ProfileState(User user) {
+    this.user = user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +48,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 SizedBox(height: 30),
                 Text(
-                  "@LilCoolCat",
+                  this.user.name,
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,

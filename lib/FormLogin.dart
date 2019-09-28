@@ -126,13 +126,13 @@ class FacebookSignInButton extends SignInWithButton{
 }
 
 class FormLogin extends StatefulWidget {
-  final bool isLoggedIn = false;
-
   @override
   _FormLogin createState() => _FormLogin();
 }
 
 class _FormLogin extends State<FormLogin> {
+  TextEditingController emailController;
+  User user = User();
   final _formKey = GlobalKey<FormState>();
   @override 
   Widget build(BuildContext context) {
@@ -167,7 +167,9 @@ class _FormLogin extends State<FormLogin> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: TextFormField(
+                          onChanged: (value) => this.setState(() {this.user.name = value;}),
                           cursorColor: Colors.white,
+                          controller: emailController,
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                               labelText: "Ingrese Email",
@@ -219,7 +221,7 @@ class _FormLogin extends State<FormLogin> {
                             Navigator.push(
                                 context,
                                 new MaterialPageRoute(
-                                    builder: (BuildContext context) => App()));
+                                    builder: (BuildContext context) => App(this.user)));
                         });
                       },
                       ),

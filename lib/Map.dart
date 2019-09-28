@@ -2,6 +2,7 @@
 import 'package:cyclub/App.dart';
 import 'package:cyclub/Profile.dart';
 import 'package:cyclub/helpers/polylines.dart';
+import 'package:cyclub/pojos/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,11 +12,20 @@ import 'package:cyclub/helpers/api.dart';
 import 'package:http/http.dart' as http;
 
 class Map extends StatefulWidget {
+  User user;
+  Map(User user) {
+    this.user = user;
+  }
   @override
-  _Map createState() => _Map();
+  _Map createState() => _Map(this.user);
 }
 
 class _Map extends State<Map>{
+  User user;
+  _Map(User user) {
+    this.user = user;
+    
+  }
   //Controller for Google Maps
   Completer<GoogleMapController> _controller = Completer();
   //Polylines for trace the routes
@@ -93,10 +103,10 @@ class _Map extends State<Map>{
               tooltip: 'Menu',
               iconSize: 50,
               icon: Icon(Icons.menu),
-              onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SideBarMenu()))
+              onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SideBarMenu(this.user)))
             ),
           ),
-          AvatarButton(),
+          AvatarButton(this.user,),
         ],
       ),
       
@@ -160,9 +170,13 @@ class _Map extends State<Map>{
 }
 
 class AvatarButton extends StatelessWidget{
+  User user;
+  AvatarButton(User user) {
+    this.user = user;
+  }
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Profile(),
+      pageBuilder: (context, animation, secondaryAnimation) => Profile(this.user,),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
