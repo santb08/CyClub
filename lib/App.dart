@@ -122,6 +122,6 @@ class SideBarMenu extends StatelessWidget {
 
 class App extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Scaffold(body: Map(), drawer: SideBarMenu());
+    return Scaffold(body: Map(),); //drawer: SideBarMenu());
   }
 }
