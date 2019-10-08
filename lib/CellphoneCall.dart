@@ -18,11 +18,22 @@ class CellphoneCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/josh-nuttall-zkVi57UYHIQ-unsplash.jpg'),
+          fit: BoxFit.fill,
+        ),
+      ),
       child: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              'LLAMADA DE EMERGENCIA',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
+            ),
             Padding(
               padding: EdgeInsets.all(10),
               child: RaisedGradientButton(
@@ -60,7 +71,7 @@ class CellphoneCall extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'Transito       ',
+                        'Transito      ',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w900),
                       ),
