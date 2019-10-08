@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cyclub/pojos/User.dart';
 import 'package:flutter/material.dart';
-import 'package:cyclub/Map.dart';
 import 'package:cyclub/App.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,10 +50,10 @@ abstract class SignInWithButton extends StatelessWidget {
   }
 }
 
-/**
- * This component is a simple button that
- * will handle all the SignIn with Firebase through Google.
- **/ 
+///
+/// This component is a simple button that
+/// will handle all the SignIn with Firebase through Google.
+/// 
 class GoogleSignInButton extends SignInWithButton {
   //Required variables to user GoogleSignIn
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
