@@ -78,6 +78,7 @@ class GoogleSignInButton extends SignInWithButton {
     if (signIn.statusCode == 200) {
       var body = json.decode(signIn.body);
       print(body["msg"]);
+      
     }
 
     //User's sign in
