@@ -15,6 +15,7 @@ import 'package:cyclub/helpers/distance.dart';
 
 class Map extends StatefulWidget {
   User user;
+  bool tracking;
   Map(User user) {
     this.user = user;
   }
@@ -53,6 +54,10 @@ class PersonalRoute {
     print("EOOOO");
     print(coordinates);
     this.coordinates = coordinates;
+  }
+
+  showJourneyInfo(String distance, double time) {
+    //TODO: Alert dialog
   }
 }
 
@@ -319,10 +324,10 @@ class AvatarButton extends StatelessWidget {
               width: 167,
               height: 180,
               decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  image: DecorationImage(
-                      image: AssetImage("assets/Panita.png"),
-                      fit: BoxFit.cover)),
+                color: Colors.transparent,
+                image: DecorationImage(
+                    image: AssetImage("assets/Panita.png"), fit: BoxFit.cover),
+              ),
             ),
           ),
         ),
@@ -341,15 +346,18 @@ class MenuButton extends StatelessWidget {
       top: 10,
       left: 0,
       child: IconButton(
-          splashColor: Colors.grey,
-          color: Colors.black,
-          tooltip: 'Menu',
-          iconSize: 50,
-          icon: Icon(Icons.menu),
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => SideBarMenu(user)))),
+        splashColor: Colors.grey,
+        color: Colors.black,
+        tooltip: 'Menu',
+        iconSize: 50,
+        icon: Icon(Icons.menu),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => SideBarMenu(user),
+          ),
+        ),
+      ),
     );
   }
 }
