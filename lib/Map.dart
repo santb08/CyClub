@@ -14,13 +14,9 @@ import 'package:http/http.dart' as http;
 import 'package:cyclub/helpers/distance.dart';
 
 class Map extends StatefulWidget {
-  User user;
   bool tracking;
-  Map(User user) {
-    this.user = user;
-  }
   @override
-  _Map createState() => _Map(this.user);
+  _Map createState() => _Map();
 }
 
 class PersonalRoute {
@@ -62,10 +58,6 @@ class PersonalRoute {
 }
 
 class _Map extends State<Map> {
-  User user;
-  _Map(User user) {
-    this.user = user;
-  }
   //Tracked route id for default
   static const TRACKED_ROUTE_ID = "89723457647654211242443";
 
@@ -221,8 +213,8 @@ class _Map extends State<Map> {
                   myLocationEnabled: true,
                   markers: Set<Marker>.from([myLocationMarker]),
                   polylines: _graphedPolylines),
-              MenuButton(this.user),
-              AvatarButton(this.user),
+              MenuButton(),
+              AvatarButton(),
               Positioned(
                 bottom: 0,
                 right: 0,
@@ -274,15 +266,9 @@ class _Map extends State<Map> {
 }
 
 class AvatarButton extends StatelessWidget {
-  User user;
-  AvatarButton(User user) {
-    this.user = user;
-  }
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Profile(
-        this.user,
-      ),
+      pageBuilder: (context, animation, secondaryAnimation) => Profile(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
@@ -337,10 +323,6 @@ class AvatarButton extends StatelessWidget {
 }
 
 class MenuButton extends StatelessWidget {
-  User user;
-  MenuButton(User user) {
-    this.user = user;
-  }
   Widget build(BuildContext context) {
     return Positioned(
       top: 10,
@@ -354,7 +336,7 @@ class MenuButton extends StatelessWidget {
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => SideBarMenu(user),
+            builder: (BuildContext context) => SideBarMenu(),
           ),
         ),
       ),

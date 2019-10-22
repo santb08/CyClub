@@ -1,3 +1,4 @@
+import 'package:cyclub/AboutUs.dart';
 import 'package:cyclub/CellphoneCall.dart';
 import 'package:cyclub/Map.dart';
 import 'package:cyclub/Profile.dart';
@@ -5,14 +6,9 @@ import 'package:cyclub/pojos/User.dart';
 import 'package:flutter/material.dart';
 
 class SideBarMenu extends StatelessWidget {
-  User user;
-  SideBarMenu(User user) {
-    this.user = user;
-  }
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          Profile(this.user),
+      pageBuilder: (context, animation, secondaryAnimation) => Profile(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
@@ -49,7 +45,7 @@ class SideBarMenu extends StatelessWidget {
             onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => Profile(this.user))),
+                    builder: (BuildContext context) => Profile())),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -176,7 +172,12 @@ class SideBarMenu extends StatelessWidget {
           ListTile(
             title: Text("Conócenos"),
             subtitle: Text('Acerca de nosotros...'),
-            onTap: () => print('about'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => AboutUs(),
+              ),
+            ),
           ),
         ],
       ),
@@ -186,11 +187,7 @@ class SideBarMenu extends StatelessWidget {
 //TODO: poner Photo by Victor Xok on Unsplash
 
 class App extends StatelessWidget {
-  User user;
-  App(User user) {
-    this.user = user;
-  }
   Widget build(BuildContext context) {
-    return Scaffold(body: Map(this.user), drawer: SideBarMenu(this.user));
+    return Scaffold(body: Map(), drawer: SideBarMenu());
   }
 }

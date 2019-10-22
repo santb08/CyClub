@@ -36,6 +36,9 @@ dependencies:
   #Launcher for the browser and the cellphone calls
   url_launcher: ^5.1.4
 
+  #shared preferences
+  shared_preferences: ^0.5.4
+
 
 dev_dependencies:
   flutter_test:
