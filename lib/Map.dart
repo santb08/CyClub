@@ -3,7 +3,7 @@ import 'package:cyclub/App.dart';
 import 'package:cyclub/Profile.dart';
 import 'package:cyclub/helpers/distance.dart';
 import 'package:cyclub/helpers/polylines.dart';
-import 'package:cyclub/pojos/User.dart';
+import 'package:cyclub/PersonalRoute.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,50 +11,13 @@ import 'dart:async';
 import 'package:location/location.dart';
 import 'package:cyclub/helpers/api.dart';
 import 'package:http/http.dart' as http;
-import 'package:cyclub/helpers/distance.dart';
+import 'AvatarButton.dart';
+import 'MenuButton.dart';
 
 class Map extends StatefulWidget {
   bool tracking;
   @override
   _Map createState() => _Map();
-}
-
-class PersonalRoute {
-  DateTime initTime;
-  DateTime endTime;
-  List<LatLng> coordinates;
-  double totalDistance;
-
-  PersonalRoute() {
-    initTime = DateTime.now();
-  }
-
-  endRoute() {
-    print("Route started  at " + initTime.toString());
-    endTime = DateTime.now();
-    print("Route ended at " + endTime.toString());
-    this.getTotalDistance();
-  }
-
-  getTotalDistance() {
-    var data = this.coordinates;
-    double totalDistance = 0;
-    for (var i = 0; i < data.length - 1; i++) {
-      totalDistance += calculateDistance(data[i], data[i + 1]);
-    }
-    print("DISTANCIA TOTAL" + totalDistance.toString());
-    this.totalDistance = totalDistance;
-  }
-
-  setCoordinates(coordinates) {
-    print("EOOOO");
-    print(coordinates);
-    this.coordinates = coordinates;
-  }
-
-  showJourneyInfo(String distance, double time) {
-    //TODO: Alert dialog
-  }
 }
 
 class _Map extends State<Map> {
@@ -262,84 +225,5 @@ class _Map extends State<Map> {
         location.requestPermission();
       }
     }
-  }
-}
-
-class AvatarButton extends StatelessWidget {
-  Route _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Profile(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(0.0, 1.0);
-        var end = Offset.zero;
-        var curve = Curves.ease;
-
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
-
-  Widget build(context) {
-    return Positioned(
-      child: Stack(children: <Widget>[
-        Positioned(
-          bottom: -80,
-          left: -60,
-          child: Container(
-            width: 225,
-            height: 225,
-            decoration: BoxDecoration(
-              color: Colors.limeAccent
-                  .withAlpha(0xBB), //I just wanted to say "Bebé" in Hex
-              borderRadius: BorderRadius.all(Radius.circular(155)),
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: -10,
-          child: GestureDetector(
-            onTap: () => Navigator.push(context, _createRoute()),
-            child: Container(
-              width: 167,
-              height: 180,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                image: DecorationImage(
-                    image: AssetImage("assets/Panita.png"), fit: BoxFit.cover),
-              ),
-            ),
-          ),
-        ),
-      ]),
-    );
-  }
-}
-
-class MenuButton extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 10,
-      left: 0,
-      child: IconButton(
-        splashColor: Colors.grey,
-        color: Colors.black,
-        tooltip: 'Menu',
-        iconSize: 50,
-        icon: Icon(Icons.menu),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => SideBarMenu(),
-          ),
-        ),
-      ),
-    );
   }
 }
