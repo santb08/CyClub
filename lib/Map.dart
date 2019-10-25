@@ -115,8 +115,7 @@ class _Map extends State<Map> {
   }
 
   _goToMyPos() {
-    LatLng position =
-        LatLng(currentLocation.latitude, currentLocation.longitude);
+    LatLng position = LatLng(currentLocation.latitude, currentLocation.longitude);
     goToPosition(position);
   }
 
@@ -154,7 +153,7 @@ class _Map extends State<Map> {
    */
   restartTrackedPolyline() {
     _graphedPolylines
-        .firstWhere((polyline) => polyline.polylineId == TRACKED_ROUTE_ID)
+        .firstWhere((polyline) => polyline.polylineId.value == TRACKED_ROUTE_ID)
         .points
         .removeWhere((point) => point != null);
   }

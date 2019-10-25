@@ -1,44 +1,25 @@
 name: cyclub
-description: A new Flutter project.
+description: The app for your local rides.
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# Read more about versioning at semver.org.
 version: 1.0.0+1
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+  cupertino_icons: ^0.1.2 
+  firebase_auth: ^0.14.0
   flutter:
     sdk: flutter
-  # Google sign in dependencies
-  google_sign_in: ^4.0.7
-  firebase_auth: ^0.14.0
-  
-  # Facebook sign in deps
   flutter_facebook_login: ^3.0.0
-
+  font_awesome_flutter: ^8.5.0 
   google_maps_flutter: ^0.5.5
-  location: ^2.3.5
+  google_sign_in: ^4.0.7
   http: ^0.12.0+2
-
-  # Icons
-  font_awesome_flutter: ^8.5.0
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-
-  #Launcher for the browser and the cellphone calls
-  url_launcher: ^5.1.4
-
-  #shared preferences
+  location: ^2.3.5
   shared_preferences: ^0.5.4
-
+  test: ^1.9.3
+  url_launcher: ^5.1.4  
 
 dev_dependencies:
   flutter_test:

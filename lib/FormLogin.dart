@@ -173,7 +173,7 @@ class _FormLogin extends State<FormLogin> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: TextFormField(
-                          onChanged: (value) => this.setState(() {
+                          onSaved: (value) => this.setState(() {
                             _setUsername(value);
                           }),
                           cursorColor: Colors.white,
