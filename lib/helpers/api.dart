@@ -11,16 +11,21 @@ import 'package:http/http.dart' as http;
  */
 Future<List<Route>> getRoutes() async {
   List<Route> list = List();
-  final response = await http.get('https://cyclub-api.herokuapp.com/api/map/routes');
+  try {
+    final response =
+        await http.get('https://cyclub-api.herokuapp.com/api/map/routes');
 
-  if (response.statusCode == 200){
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load routes');
+    } else {
       list = (json.decode(response.body) as List)
-        .map((data) => new Route.fromJson(data))
-        .toList();
+          .map((data) => new Route.fromJson(data))
+          .toList();
 
       return list;
-  } else {
-    throw Exception('Failed to load routes');
+    }
+  } catch (err) {
+    throw (err);
   }
 }
 
