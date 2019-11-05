@@ -1,7 +1,6 @@
 import 'dart:convert';
-
+import 'package:cyclub/pojos/User.dart';
 import 'package:cyclub/pojos/route.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 /**
@@ -28,4 +27,11 @@ Future<List<Route>> getRoutes() async {
   } catch (err) {
     throw (err);
   }
+}
+
+Future<dynamic> userSignIn(User user) async {  
+  Map<String, String> headers = {"Content-type": "application/json"};
+  final response = await http.post('https://cyclub-api.herokuapp.com/api/users/SignInWithCredentials', //https://cyclub-api.herokuapp.com/api/users/SignInWithCredentials', 
+    body: {"email": user.email, "name": user.name });
+  return response;
 }
