@@ -1,18 +1,16 @@
-//ICONS https://www.flaticon.com/authors/freepik
-import 'package:cyclub/App.dart';
-import 'package:cyclub/Profile.dart';
-import 'package:cyclub/helpers/distance.dart';
-import 'package:cyclub/helpers/polylines.dart';
+// @packages
 import 'package:cyclub/PersonalRoute.dart';
+import 'package:cyclub/helpers/polylines.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
 import 'package:location/location.dart';
-import 'package:cyclub/helpers/api.dart';
-import 'package:http/http.dart' as http;
+
+// @scripts
 import 'AvatarButton.dart';
 import 'MenuButton.dart';
+import 'dart:async';
+
 
 class Map extends StatefulWidget {
   bool tracking;
@@ -21,26 +19,19 @@ class Map extends StatefulWidget {
 }
 
 class _Map extends State<Map> {
-  //Tracked route id for default
-  static const TRACKED_ROUTE_ID = "89723457647654211242443";
+  static const TRACKED_ROUTE_ID = "89723457647654211242443"; 
 
-  // Personal route object
+  BitmapDescriptor bitmapImage;
+  Completer<GoogleMapController> _controller = Completer();
+  Location location = new Location();
+  LocationData currentLocation;
+  Marker myLocationMarker = Marker(markerId: MarkerId("me"), position: LatLng(0, 0));
   PersonalRoute myRoute = PersonalRoute();
-
-  // Flag to know if the user's tracking its route
+  Set<Polyline> _graphedPolylines = Set();
   bool _trackingMyRoute = false;
   int distance = 0;
-  //Controller for Google Maps
-  Completer<GoogleMapController> _controller = Completer();
-  //Location object for this code
-  Location location = new Location();
-  //Marker for my position
-  Marker myLocationMarker =
-      Marker(markerId: MarkerId("me"), position: LatLng(0, 0));
-  // Set of polylines that will be graphed in the map
-  Set<Polyline> _graphedPolylines = Set();
 
-  /**
+  /*
    * initState will initialize the position of the app at user's
    * Also will get the routes from the api (TODO) and will save them to be traced in the map
    */
@@ -52,7 +43,7 @@ class _Map extends State<Map> {
     _addLocationListener();
   }
 
-  /**
+  /*
    * This function will return an empty tracked route polyline with default ID
    */
   Polyline _getDefaultTrackingPolyline() {
@@ -73,7 +64,7 @@ class _Map extends State<Map> {
     });
   }
 
-  /**
+  /*
    * Gets a list of polylines, and then sets it to the state
    */
   _loadPolylines() async {
@@ -94,8 +85,7 @@ class _Map extends State<Map> {
         if (_trackingMyRoute) {
           LatLng coor = LatLng(location.latitude, location.longitude);
           _graphedPolylines
-              .firstWhere(
-                  (polyline) => polyline.polylineId.value == TRACKED_ROUTE_ID)
+              .firstWhere((polyline) => polyline.polylineId.value == TRACKED_ROUTE_ID)
               .points
               .add(coor);
         }
@@ -103,7 +93,7 @@ class _Map extends State<Map> {
     });
   }
 
-  /**
+  /*
    * After map's created, this handler will be executed
    * first of all, we'll get position
    * then we'll point a marker right there, and we'll move the camera to that location
@@ -125,7 +115,7 @@ class _Map extends State<Map> {
         .points;
   }
 
-  /**
+  /*
    * This function will show:
    *  Coordinates of the route that user did
    *  Time that the user used in its route (TODO)
@@ -135,12 +125,12 @@ class _Map extends State<Map> {
     if (_trackingMyRoute) {
       print(getTrackedCoordinates());
       myRoute.setCoordinates(_graphedPolylines
-          .firstWhere(
-              (polyline) => polyline.polylineId.value == TRACKED_ROUTE_ID)
+          .firstWhere((polyline) => polyline.polylineId.value == TRACKED_ROUTE_ID)
           .points);
       myRoute.endRoute();
       myRoute = PersonalRoute();
     }
+    
     // Update state to start/stop tracking routes
     this.setState(() {
       _trackingMyRoute = !_trackingMyRoute;
@@ -148,7 +138,7 @@ class _Map extends State<Map> {
     });
   }
 
-  /**
+  /*
    * This function will find the polyline of the tracked route and it'll restart its list of points
    */
   restartTrackedPolyline() {
@@ -178,24 +168,30 @@ class _Map extends State<Map> {
               MenuButton(),
               AvatarButton(),
               Positioned(
-                bottom: 0,
+                bottom: 70,
                 right: 0,
                 child: IconButton(
                     iconSize: 50,
                     icon: Icon(Icons.trip_origin),
                     onPressed: _trackMyRouteButtonHandler),
+              ),
+              Positioned(
+                bottom: 10,
+                right: 10,
+                child: FloatingActionButton.extended(
+                  label: Text("My routes"),
+                  onPressed: () { print("My routes"); },
+                )
               )
             ],
           );
   }
 
-  /**
+  /*
    * According to @target it'll make the map move right here
    */
   Future<void> goToPosition(LatLng target) async {
-    var cameraTarget =
-        CameraPosition(bearing: 0, target: target, tilt: 45, zoom: 16);
-
+    var cameraTarget = CameraPosition(bearing: 0, target: target, tilt: 45, zoom: 16);
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(cameraTarget));
     _updateMarker();
@@ -208,10 +204,7 @@ class _Map extends State<Map> {
     return bitmapImage;
   }
 
-  BitmapDescriptor bitmapImage;
-
-  LocationData currentLocation;
-  /**
+  /*
    * It'll get my position and it'll call goToPosition() to move came to my position
    */
   Future<void> _getMyLocation() async {

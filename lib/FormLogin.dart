@@ -14,7 +14,6 @@ abstract class SignInWithButton extends StatelessWidget {
   String text;
   IconData icon;
 
-  //Constructor
   SignInWithButton(this.text, this.icon);
 
   Future<User> signIn();
@@ -46,23 +45,29 @@ abstract class SignInWithButton extends StatelessWidget {
   }
 }
 
-///
-/// This component is a simple button that
-/// will handle all the SignIn with Firebase through Google.
-///
+
 class GoogleSignInButton extends SignInWithButton {
-  //Required variables to user GoogleSignIn
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  GoogleSignInButton() : super("Google", FontAwesomeIcons.google);
+  dynamic onLoadMap;
 
-  /**
+  GoogleSignInButton({this.onLoadMap}) : super("Google", FontAwesomeIcons.google);
+
+  _setUserId(String userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_id', userId);
+  }
+
+  _setUsername(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', username);
+  }
+
+  /*
    * This async function will let us sign in with google
    * implementation used in official docs.
    * After all, it'll return a FirebaseUser that's a Future than can be solved as we want
-   *
-   * @
    */
   Future<User> signIn() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -72,14 +77,15 @@ class GoogleSignInButton extends SignInWithButton {
     //User's log in
     if (signIn.statusCode == 200) {
       var body = json.decode(signIn.body);
-      print(body["msg"]);
+      _setUserId(body['id']);
+      _setUsername(body['name']);
+      this.onLoadMap();
     }
 
     //User's sign in
     if (signIn.statusCode == 201) {
       //TODO: Redirect to fill my profile
       var body = json.decode(signIn.body);
-      print("HOLA");
     }
   }
 }
@@ -90,7 +96,7 @@ class FacebookSignInButton extends SignInWithButton {
     this.icon = icon;
   }
 
-  /**
+  /*
    * This async function will let us sign in with facebook
    * implementation used in official docs.
    * After all, it'll return a FirebaseUser that's a Future than can be solved as we want
@@ -132,12 +138,21 @@ class _FormLogin extends State<FormLogin> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SharedPreferences.getInstance()
-      ..then((prefs) {
+      .then((prefs) {
         setState(() => this._prefs = prefs);
       });
+  }
+
+  void onLoadMap() {
+    print("Logged");
+    setState(() {
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => App()));
+    });
   }
 
   _setUsername(String username) async {
@@ -226,16 +241,12 @@ class _FormLogin extends State<FormLogin> {
                       minWidth: 150,
                       shape: StadiumBorder(),
                       onPressed: () {
-                        setState(() {
-                          if (_formKey.currentState.validate())
-                            Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (BuildContext context) => App()));
-                        });
-                      },
+                        if (_formKey.currentState.validate()) onLoadMap();
+                      }
                     ),
-                    GoogleSignInButton(),
+                    GoogleSignInButton(
+                      onLoadMap: onLoadMap
+                    ),
                   ],
                 ),
               ),

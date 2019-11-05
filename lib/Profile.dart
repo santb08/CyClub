@@ -7,25 +7,24 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  SharedPreferences _prefs;
+  String _username;
 
   @override
   void initState() {
     super.initState();
-    SharedPreferences.getInstance()
-      ..then((prefs) {
-        setState(() => this._prefs = prefs);
-      });
+
+    this._loadInfo();
+  }
+
+  _loadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      this._username = prefs.getString('username') ?? 'error';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    String username;
-    try {
-      username = this._prefs.getString('username');
-    } catch (e) {
-      print(e);
-    }
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(.9),
       body: Stack(
@@ -55,7 +54,7 @@ class _ProfileState extends State<Profile> {
                       ]),
                 ),
                 SizedBox(height: 30),
-                Text(username,
+                Text(_username ?? 'fetchDataErr',
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
