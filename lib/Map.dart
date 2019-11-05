@@ -1,5 +1,4 @@
 //ICONS https://www.flaticon.com/authors/freepik
-
 import 'package:cyclub/Profile.dart';
 import 'package:cyclub/helpers/polylines.dart';
 import 'package:flutter/material.dart';
@@ -105,20 +104,7 @@ class _Map extends State<Map>{
                 Positioned(
                   bottom: 0,
                   left: -10,
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(context, _createRoute()),
-                    child: Container(
-                      width: 167,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        image: DecorationImage(
-                          image: AssetImage("assets/Panita.png"),
-                          fit: BoxFit.cover
-                        )
-                      ),
-                    ),
-                  ),
+                  child: AvatarButton()
                 ),
               ]
             ),
@@ -129,23 +115,6 @@ class _Map extends State<Map>{
     );
   }
 
-  Route _createRoute() {
-        return PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => Profile(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            var begin = Offset(0.0, 1.0);
-            var end = Offset.zero;
-            var curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-      }
   /**
    * According to @target it'll make the map move right here
    */
@@ -199,5 +168,42 @@ class _Map extends State<Map>{
       currentLocation = null;
     }
 
+  }
+}
+
+class AvatarButton extends StatelessWidget{
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => Profile(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
+  Widget build(context) {
+    return GestureDetector(
+      onTap: () => Navigator.push(context, _createRoute()),
+      child: Container(
+        width: 167,
+        height: 180,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          image: DecorationImage(
+            image: AssetImage("assets/Panita.png"),
+            fit: BoxFit.cover
+          )
+        ),
+      ),
+    );
   }
 }
